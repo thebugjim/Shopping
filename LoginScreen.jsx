@@ -41,6 +41,7 @@ var LoginScreen = React.createClass({
     // other fields can be set just like with Parse.Object
     user.set("phoneNumber", document.getElementById('phonenumber').value);
     user.set("zipCode", document.getElementById('zipcode').value);
+    user.set("noRequests", true);
 
     user.signUp(null, {
       success: function(user) {
