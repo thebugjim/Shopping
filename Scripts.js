@@ -233,15 +233,18 @@ var LoginScreen = React.createClass({
     ;
   }
 });
-"use strict";
+'use strict';
 
-var LoginScreen = React.createClass({
-  displayName: "LoginScreen",
+var OrderPage = React.createClass({
+  displayName: 'OrderPage',
 
   mixins: [ParseReact.Mixin], // Enable query subscriptions
 
   getInitialState: function getInitialState() {
-    return {};
+    return {
+      itemForms: [],
+      i: 0
+    };
   },
 
   observe: function observe() {
@@ -252,158 +255,14 @@ var LoginScreen = React.createClass({
     };
   },
 
-  render: function render() {
-    return React.createElement(
-      "div",
-      null,
-      React.createElement("br", null),
-      React.createElement("br", null),
-      React.createElement(
-        "center",
-        null,
-        React.createElement(
-          "h2",
-          null,
-          "Welcome to BundleMe"
-        )
-      ),
-      React.createElement("br", null),
-      React.createElement("br", null),
-      React.createElement(
-        "center",
-        null,
-        React.createElement(
-          "h3",
-          null,
-          "Add an order"
-        )
-      ),
-      React.createElement(
-        "form",
-        { className: "form-inline" },
-        React.createElement(
-          "div",
-          { className: "form-group" },
-          React.createElement(
-            "label",
-            { htmlFor: "orderurl" },
-            "Order URL"
-          ),
-          React.createElement("input", { type: "url", className: "form-control", id: "orderurl", size: "50%", placeholder: "www.amazon.com/example" })
-        ),
-        React.createElement(
-          "div",
-          { className: "form-group" },
-          React.createElement(
-            "label",
-            { htmlFor: "price" },
-            "Price"
-          ),
-          React.createElement(
-            "div",
-            { className: "input-group" },
-            React.createElement(
-              "div",
-              { className: "input-group-addon" },
-              "$"
-            ),
-            React.createElement("input", { type: "text", className: "form-control", size: "4", id: "price", placeholder: "XX.XX" })
-          )
-        )
-      ),
-      React.createElement(
-        "form",
-        null,
-        React.createElement(
-          "div",
-          { className: "form-group" },
-          React.createElement("div", { className: "col-sm-offset-2 col-sm-10" })
-        ),
-        React.createElement(
-          "div",
-          { className: "form-group" },
-          React.createElement(
-            "div",
-            { className: "col-sm-offset-2 col-sm-10" },
-            React.createElement(
-              "button",
-              { type: "button", className: "btn btn-default" },
-              "Add another item"
-            )
-          )
-        ),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement("br", null),
-        React.createElement(
-          "div",
-          { className: "form-group" },
-          React.createElement(
-            "div",
-            { className: "col-sm-offset-2 col-sm-10" },
-            React.createElement(
-              "button",
-              { type: "submit", className: "btn btn-default" },
-              "Submit Order"
-            )
-          ),
-          React.createElement(
-            "p",
-            null,
-            "Note: total of orders must be at least $7.00"
-          )
-        )
-      )
-    );
-  }
-});
-"use strict";
-
-Parse.initialize("jAXTJpHdBxRMFMXeP29jf7EaSf0S0O325IQJf68L", "DjSOeoEzzt9ueNWpjsP8fRy8CQWW1XegcKVtD1gs");
-var App = React.createClass({
-  displayName: "App",
-
-  mixins: [ParseReact.Mixin], // Enable query subscriptions
-
-  getInitialState: function getInitialState() {
-    return {};
-  },
-
-  observe: function observe() {
-    // Subscribe to all Comment objects, ordered by creation date
-    // The results will be available at this.data.comments
-    return {
-      comments: new Parse.Query('Comment').ascending('createdAt')
-    };
-  },
-
-  checkRequests: function checkRequests() {
-
-    var Requests = Parse.Object.extend("Requests");
-    var query = new Parse.Query(Requests);
-
-    var myUserId = Parse.User.current().id;
-
-    query.equalTo("userObjectId", myUserId);
-    query.find({
-      success: function success(results) {
-        // Do something with the returned Parse.Object values
-        for (var i = 0; i < results.length; i++) {
-          var object = results[i];
-          if (object.get('status') == 0) {
-            //display the pending request page
-            console.log(0);
-          }
-          if (object.get('status') == 1) {
-            console.log(1);
-            //show the matched page
-          }
-        }
-      }
-    });
+  componentDidMount: function componentDidMount() {
+    this.generateItemForm();
   },
 
   createRequest: function createRequest(requestItemUrl, requestItemPrice) {
+    var requestItemUrl = this.state.itemForms.map(function (item) {
+      console.log(item);
+    });
 
     // front end does this over a loop
     // requestItemUrl.push( );
@@ -463,6 +322,180 @@ var App = React.createClass({
       },
       error: function error(requests, _error3) {
         alert('Failed to create new object ' + _error3.message);
+      }
+    });
+  },
+
+  generateItemForm: function generateItemForm() {
+    var newForm = React.createElement(
+      'div',
+      { className: 'form-inline', key: this.state.i++ },
+      React.createElement(
+        'div',
+        { className: 'form-group' },
+        React.createElement(
+          'label',
+          { htmlFor: 'orderurl' },
+          'Order URL'
+        ),
+        React.createElement('input', { type: 'url', className: 'form-control itemurl', size: '50%', placeholder: 'www.amazon.com/example' })
+      ),
+      React.createElement(
+        'div',
+        { className: 'form-group' },
+        React.createElement(
+          'label',
+          { htmlFor: 'price' },
+          'Price'
+        ),
+        React.createElement(
+          'div',
+          { className: 'input-group' },
+          React.createElement(
+            'div',
+            { className: 'input-group-addon' },
+            '$'
+          ),
+          React.createElement('input', { type: 'text', className: 'form-control itemprice', size: '4', placeholder: 'XX.XX' })
+        )
+      )
+    );
+    var itemForms = this.state.itemForms;
+    itemForms.push(newForm);
+    this.setState({
+      itemForms: itemForms
+    });
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement('br', null),
+      React.createElement('br', null),
+      React.createElement(
+        'center',
+        null,
+        React.createElement(
+          'h2',
+          null,
+          'Welcome to BundleMe'
+        )
+      ),
+      React.createElement('br', null),
+      React.createElement('br', null),
+      React.createElement(
+        'center',
+        null,
+        React.createElement(
+          'h3',
+          null,
+          'Add an order'
+        )
+      ),
+      this.state.itemForms,
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement('div', { className: 'col-sm-offset-2 col-sm-10' })
+        ),
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'div',
+            { className: 'col-sm-offset-2 col-sm-10' },
+            React.createElement(
+              'button',
+              { type: 'button', className: 'btn btn-default', onClick: this.generateItemForm },
+              'Add another item'
+            )
+          )
+        ),
+        React.createElement('br', null),
+        React.createElement('br', null),
+        React.createElement('br', null),
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'div',
+            { className: 'col-sm-offset-2 col-sm-10' },
+            React.createElement(
+              'button',
+              { type: 'submit', className: 'btn btn-default', onClick: this.createRequest },
+              'Submit Order'
+            )
+          ),
+          React.createElement(
+            'p',
+            null,
+            'Note: total of orders must be at least $7.00'
+          )
+        )
+      )
+    );
+  }
+});
+"use strict";
+
+Parse.initialize("jAXTJpHdBxRMFMXeP29jf7EaSf0S0O325IQJf68L", "DjSOeoEzzt9ueNWpjsP8fRy8CQWW1XegcKVtD1gs");
+var App = React.createClass({
+  displayName: "App",
+
+  mixins: [ParseReact.Mixin], // Enable query subscriptions
+
+  getInitialState: function getInitialState() {
+    return {};
+  },
+
+  observe: function observe() {
+    // Subscribe to all Comment objects, ordered by creation date
+    // The results will be available at this.data.comments
+    return {
+      comments: new Parse.Query('Comment').ascending('createdAt')
+    };
+  },
+
+  componentDidMount: function componentDidMount() {
+    this.checkRequests();
+  },
+
+  checkRequests: function checkRequests() {
+
+    var Requests = Parse.Object.extend("Requests");
+    var query = new Parse.Query(Requests);
+
+    var myUserId = Parse.User.current().id;
+
+    query.equalTo("userObjectId", myUserId);
+    var self = this;
+    query.find({
+      success: function success(results) {
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          if (object.get('status') == 0) {
+            //display the pending request page
+            self.setState({
+              page: 'PendingPage'
+            });
+            return;
+          }
+          if (object.get('status') == 1) {
+            //show the matched page
+            self.setState({
+              page: 'MatchPage'
+            });
+            return;
+          }
+        }
+        self.setState({
+          page: 'OrderPage'
+        });
       }
     });
   },

@@ -14,6 +14,10 @@ var App = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.checkRequests()
+  },
+
   checkRequests: function() {
 
     var Requests = Parse.Object.extend("Requests");
@@ -22,6 +26,7 @@ var App = React.createClass({
     var myUserId = Parse.User.current().id;
 
     query.equalTo("userObjectId", myUserId);
+    var self = this;
     query.find({
       success: function(results) {
         // Do something with the returned Parse.Object values
@@ -30,80 +35,26 @@ var App = React.createClass({
           if(object.get('status') == 0)
           {
             //display the pending request page
-            console.log(0)
+            self.setState({
+              page: 'PendingPage'
+            })
+            return;
           }
           if(object.get('status') == 1)
           {
-            console.log(1)
             //show the matched page
+            self.setState({
+              page: 'MatchPage'
+            })
+            return;
           }
         }
+        self.setState({
+          page: 'OrderPage'
+        })
+
       },
     })
-  },
-
-  createRequest: function(requestItemUrl, requestItemPrice) {
-
-    // front end does this over a loop
-    // requestItemUrl.push( );
-    // requestItemPrice.push( );
-    // FRONT-END TODO
-
-    var myUserId = Parse.User.current().id;
-
-    var Requests = Parse.Object.extend('Requests');
-
-    // create a request for the user
-    var requests = new Requests();
-    requests.set('userObjectId', myUserId);
-
-    requests.save(null, {
-            success: function(requests) {
-                 //alert('New object created with objectId: '+requests.id);
-                            },
-            error:function(requests, error) {
-                 alert('Failed to create new object '+ error.message);
-            }
-    });
-
-    var myRequestsId = requests.get('objectId');
-
-    var RequestItems = Parse.Object.extend('RequestItems');
-
-    var myTotalPrice = 0;
-
-    // create a request item for the user associated with the request
-    for (var i = 0; i < requestItemUrl.length; i++) {
-            var requestItems = new RequestItems();
-
-            requestItems.set('userObjectId', myUserId);
-            requestItems.set('requestsObjectId', myRequestsId);
-            requestItems.set('url', requestItemUrl[i]);
-            requestItems.set('itemPrice', requestItemPrice[i]);
-
-            myTotalPrice += requestItemPrice[i];
-
-            requestItems.save(null, {
-                success: function(requestItems) {
-                    //alert('New object created with objectId: '+ requestItems.id);
-                },
-                error:function(requestItems, error) {
-                    alert('Failed to create new object '+ error.message);
-                }
-            });
-    }
-
-    // update total price for the request
-
-    requests.set('totalPrice', myTotalPrice);
-    requests.save(null, {
-            success: function(requests) {
-                 //alert('New object created with objectId: '+requests.id);
-            },
-            error:function(requests, error) {
-                 alert('Failed to create new object '+ error.message);
-            }
-    });
   },
 
   render: function() {
