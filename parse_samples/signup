@@ -1,0 +1,21 @@
+signup
+
+var user = new Parse.User();
+user.set("username", "my email");
+user.set("password", "my pass");
+user.set("email", "my email");
+
+// other fields can be set just like with Parse.Object
+user.set("phoneNumber", "my number");
+user.set("zipCode", "my zipcode");
+
+
+user.signUp(null, {
+  success: function(user) {
+    // Hooray! Let them use the app now.
+  },
+  error: function(user, error) {
+    // Show the error message somewhere and let the user try again.
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
