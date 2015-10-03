@@ -1,0 +1,26 @@
+// use/save var pendingRequest from check current requests,
+// results[i] such that its status is 0
+
+// returned in myPendingRequestItems - array
+
+var myPendingRequestItems = [];
+var myPendingRequestId = pendingRequest.get('objectId');
+var myUserId = currentUser.get('objectId');
+
+var RequestItems = Parse.Object.extend("RequestItems");
+var query = new Parse.Query(RequestItems);
+query.equalTo("requestsObjectId", myPendingRequestId);
+query.find({
+    success: function(results) {
+        // alert
+        for(var i = 0; i < results.length; i++) {
+            var object = results[i];
+            if(object.get('requestsObjectId') === myPendingRequestId) {
+                myPendingRequestItems.push(object);
+            }
+        }
+    },
+    error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+    }
+});
