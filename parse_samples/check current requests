@@ -1,0 +1,43 @@
+parse check current requests
+
+
+var my userid = currentUser.get('objectId');
+
+//check if user has any requests:
+if(currentUser.get('noRequests'))
+{
+	//show create request page
+}
+else
+{
+//everything below
+
+
+var Requests = Parse.Object.extend("Requests");
+var query = new Parse.Query(Requests);
+query.equalTo("userObjectId", "my userid");
+query.find({
+  success: function(results) {
+    alert("Successfully retrieved " + results.length + " requests.");
+    // Do something with the returned Parse.Object values
+    for (var i = 0; i < results.length; i++) {
+      var object = results[i];
+      if(object.get('status') == 0)
+      {
+      	//display the pending request page
+
+      }
+      if(object.get('status') == 1)
+      {
+        //show the matched page
+      }
+    }
+  },
+  error: function(error) {
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+
+
+
+}
