@@ -280,34 +280,34 @@ var LoginScreen = React.createClass({
       ),
       React.createElement(
         "form",
-        { "class": "form-inline" },
+        { className: "form-inline" },
         React.createElement(
           "div",
-          { "class": "form-group" },
+          { className: "form-group" },
           React.createElement(
             "label",
-            { "for": "orderurl" },
+            { htmlFor: "orderurl" },
             "Order URL"
           ),
-          React.createElement("input", { type: "url", "class": "form-control", id: "orderurl", size: "50%", placeholder: "www.amazon.com/example" })
+          React.createElement("input", { type: "url", className: "form-control", id: "orderurl", size: "50%", placeholder: "www.amazon.com/example" })
         ),
         React.createElement(
           "div",
-          { "class": "form-group" },
+          { className: "form-group" },
           React.createElement(
             "label",
-            { "for": "price" },
+            { htmlFor: "price" },
             "Price"
           ),
           React.createElement(
             "div",
-            { "class": "input-group" },
+            { className: "input-group" },
             React.createElement(
               "div",
-              { "class": "input-group-addon" },
+              { className: "input-group-addon" },
               "$"
             ),
-            React.createElement("input", { type: "text", "class": "form-control", size: "4", id: "price", placeholder: "XX.XX" })
+            React.createElement("input", { type: "text", className: "form-control", size: "4", id: "price", placeholder: "XX.XX" })
           )
         )
       ),
@@ -316,18 +316,18 @@ var LoginScreen = React.createClass({
         null,
         React.createElement(
           "div",
-          { "class": "form-group" },
-          React.createElement("div", { "class": "col-sm-offset-2 col-sm-10" })
+          { className: "form-group" },
+          React.createElement("div", { className: "col-sm-offset-2 col-sm-10" })
         ),
         React.createElement(
           "div",
-          { "class": "form-group" },
+          { className: "form-group" },
           React.createElement(
             "div",
-            { "class": "col-sm-offset-2 col-sm-10" },
+            { className: "col-sm-offset-2 col-sm-10" },
             React.createElement(
               "button",
-              { type: "button", "class": "btn btn-default" },
+              { type: "button", className: "btn btn-default" },
               "Add another item"
             )
           )
@@ -337,13 +337,13 @@ var LoginScreen = React.createClass({
         React.createElement("br", null),
         React.createElement(
           "div",
-          { "class": "form-group" },
+          { className: "form-group" },
           React.createElement(
             "div",
-            { "class": "col-sm-offset-2 col-sm-10" },
+            { className: "col-sm-offset-2 col-sm-10" },
             React.createElement(
               "button",
-              { type: "submit", "class": "btn btn-default" },
+              { type: "submit", className: "btn btn-default" },
               "Submit Order"
             )
           ),
@@ -470,7 +470,7 @@ var App = React.createClass({
   render: function render() {
     if (!Parse.User.current()) return React.createElement(LoginScreen, null);
 
-    if (this.state.showOrderPage) {
+    if (this.state.page === 'OrderPage') {
       return React.createElement(OrderPage, null);
     }
 
