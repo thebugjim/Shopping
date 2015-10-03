@@ -1,0 +1,48 @@
+var myUserId = currentUser.get('objectId');
+var myRequestId = request.get('objectId');  // from check current requests
+
+var matchedRequests = []; // array of Requests matched
+var matchedUsers = [];
+
+var Requests = Parse.Object.extend("Requests");
+var query = new Parse.Query(Requests);
+// check for same matchedObjectId and status == 1 for matched
+query.equalTo("status", 1); // matched
+query.contains("matchedObjectId", myRequestId);
+query.find({   // get matched requests
+    success: function(results) {
+        // alert
+        for (var i = 0; i < results.length; i++) {
+            matchedRequests.push( results[i] );
+        }
+    },
+    error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+    }
+};
+
+// matched requests done.
+// now give user info and prices
+var Users = Parse.Object.extend("Users");
+for(var i = 0; i < matchedRequests.length; i++) {
+    var object = matchedRequests[i];
+    var query = new Parse.Query(Users);
+    query.equalTo("objectId", object.get('userObjectId'));
+    query.find({
+        success: function(results) {
+            alert("Successfully retrieved " + results.length + " requests.id");
+            matchedUsers[i] = results[0];
+        },
+        error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+        }
+    });         
+}
+
+// get user info
+for(var i = 0; i < matchedUsers.length; i++) {
+    var usr = matchedUsers[i];
+    usr.get("email");
+    usr.get("phoneNumber");
+    matchedRequests[i].get("totalPrice");
+}
