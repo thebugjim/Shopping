@@ -1,4 +1,6 @@
-Parse.User.logIn("myname", "mypass", {
+// use vars myName, myPass
+
+Parse.User.logIn(myName, myPass, {
   success: function(user) {
     // Do stuff after successful login.
 

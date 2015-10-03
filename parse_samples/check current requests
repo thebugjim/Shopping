@@ -1,7 +1,8 @@
 parse check current requests
 
+// use vars:
 
-var my userid = currentUser.get('objectId');
+var myUserId = currentUser.get('objectId');
 
 //check if user has any requests:
 if(currentUser.get('noRequests'))
@@ -15,7 +16,7 @@ else
 
 var Requests = Parse.Object.extend("Requests");
 var query = new Parse.Query(Requests);
-query.equalTo("userObjectId", "my userid");
+query.equalTo("userObjectId", "myUserId");
 query.find({
   success: function(results) {
     alert("Successfully retrieved " + results.length + " requests.");

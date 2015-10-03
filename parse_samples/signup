@@ -1,13 +1,15 @@
 signup
 
+// use vars myEmail, myPass, myEmail, myPhoneNumber, myZipCode
+
 var user = new Parse.User();
-user.set("username", "my email");
-user.set("password", "my pass");
-user.set("email", "my email");
+user.set("username", myEmail);
+user.set("password", myPass);
+user.set("email", myEmail);
 
 // other fields can be set just like with Parse.Object
-user.set("phoneNumber", "my number");
-user.set("zipCode", "my zipcode");
+user.set("phoneNumber", myPhoneNumber);
+user.set("zipCode", myZipCode);
 
 
 user.signUp(null, {
