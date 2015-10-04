@@ -374,15 +374,64 @@ var MatchPage = React.createClass({
           var query2 = new Parse.Query(RequestItems);
           query2.equalTo("userObjectId", item.get('userObjectId'));
           query2.find({
+
             success: function success(results) {
-              for (i = 0; i < results.length; i++) {
+              var items = [];
+
+              for (var i = 0; i < results.length; i++) {
                 var object = results[i];
                 var url = object.get("url");
                 var itemprice = object.get("itemPrice");
                 //display this item
+                items.push(React.createElement(
+                  "tr",
+                  null,
+                  React.createElement("td", null),
+                  React.createElement(
+                    "td",
+                    null,
+                    url
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    itemprice
+                  )
+                ));
               }
+              // rows.push(
+              //   <tr>
+              //     <table className="table">
+              //       <thead>
+              //         <th>example1@gmail.com</th>
+              //         <th>Item URL</th>
+              //         <th>Price</th>
+              //       <thead>
+              // )
             }
           });
+
+          // <tr>
+          //   <table className="table">
+          //     <thead>
+          //       <tr>
+          //         <th>example1@gmail.com</th>
+          //         <th>Item URL</th>
+          //         <th>Price</th>
+          //       </tr>
+          //       <tr>
+          //         <td></td>
+          //         <td>www.amazon.com/example</td>
+          //         <td>20.00</td>
+          //       </tr>
+          //       <tr>
+          //         <td></td>
+          //         <td>www.amazon.com/example</td>
+          //         <td>15.00</td>
+          //       </tr>
+          //     </thead> 
+          //   </table>
+          // </tr>
 
           var rows = self.state.rows;
           rows.push(React.createElement(
@@ -459,32 +508,248 @@ var MatchPage = React.createClass({
               "table",
               { className: "table table-striped" },
               React.createElement(
-                "thead",
+                "tbody",
                 null,
                 React.createElement(
                   "tr",
                   null,
                   React.createElement(
-                    "th",
-                    null,
-                    "Email"
-                  ),
+                    "table",
+                    { className: "table" },
+                    React.createElement(
+                      "thead",
+                      null,
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement(
+                          "th",
+                          null,
+                          "example1@gmail.com"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Item URL"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Price"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "20.00"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "15.00"
+                        )
+                      )
+                    )
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
                   React.createElement(
-                    "th",
-                    null,
-                    "Phone"
-                  ),
+                    "table",
+                    { className: "table" },
+                    React.createElement(
+                      "thead",
+                      null,
+                      React.createElement(
+                        "th",
+                        null,
+                        "example2@gmail.com"
+                      ),
+                      React.createElement(
+                        "th",
+                        null,
+                        "Item URL"
+                      ),
+                      React.createElement(
+                        "th",
+                        null,
+                        "Price"
+                      )
+                    ),
+                    React.createElement(
+                      "tr",
+                      null,
+                      React.createElement("td", null),
+                      React.createElement(
+                        "td",
+                        null,
+                        "www.amazon.com/example"
+                      ),
+                      React.createElement(
+                        "td",
+                        null,
+                        "20.00"
+                      )
+                    ),
+                    React.createElement(
+                      "tr",
+                      null,
+                      React.createElement("td", null),
+                      React.createElement(
+                        "td",
+                        null,
+                        "www.amazon.com/example"
+                      ),
+                      React.createElement(
+                        "td",
+                        null,
+                        "15.00"
+                      )
+                    )
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
                   React.createElement(
-                    "th",
-                    null,
-                    "Order Total"
+                    "table",
+                    { className: "table" },
+                    React.createElement(
+                      "thead",
+                      null,
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement(
+                          "th",
+                          null,
+                          "example3@gmail.com"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Item URL"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Price"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "20.00"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "15.00"
+                        )
+                      )
+                    )
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "table",
+                    { className: "table" },
+                    React.createElement(
+                      "thead",
+                      null,
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement(
+                          "th",
+                          null,
+                          "example4@gmail.com"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Item URL"
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          "Price"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "20.00"
+                        )
+                      ),
+                      React.createElement(
+                        "tr",
+                        null,
+                        React.createElement("td", null),
+                        React.createElement(
+                          "td",
+                          null,
+                          "www.amazon.com/example"
+                        ),
+                        React.createElement(
+                          "td",
+                          null,
+                          "15.00"
+                        )
+                      )
+                    )
                   )
                 )
-              ),
-              React.createElement(
-                "tbody",
-                null,
-                this.state.rows
               )
             )
           )
