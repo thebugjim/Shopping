@@ -109,66 +109,32 @@ var MatchPage = React.createClass({
                 var url = object.get("url");
                 var itemprice = object.get("itemPrice");
                 //display this item
-                items.push((<tr>
+                items.push((<tr key={i}>
                   <td></td>
                   <td>{url}</td>
                   <td>{itemprice}</td>
                 </tr>))
               }
+              var rows = self.state.rows
               rows.push(
-                <tr>
+                <tr key={Date.now()}>
                   <table className="table">
-                    <thead>
+                    <tr>
                       <th>example1@gmail.com</th>
                       <th>Item URL</th>
                       <th>Price</th>
-                    <thead>
+                    </tr>
+                    {items}
+                  </table>
+                </tr>
               )
+              self.setState({
+                rows
+              })
             }
           })
-
-          // <tr>
-          //   <table className="table">
-          //     <thead>
-          //       <tr>
-          //         <th>example1@gmail.com</th>
-          //         <th>Item URL</th>
-          //         <th>Price</th>
-          //       </tr>
-          //       <tr>
-          //         <td></td>
-          //         <td>www.amazon.com/example</td>
-          //         <td>20.00</td>
-          //       </tr>
-          //       <tr>
-          //         <td></td>
-          //         <td>www.amazon.com/example</td>
-          //         <td>15.00</td>
-          //       </tr>
-          //     </thead>  
-          //   </table>
-          // </tr>
-
-          var rows = self.state.rows
-          rows.push(
-            (<tr>
-              <td>{results[0].get('email')}</td>
-              <td>{results[0].get('phoneNumber')}</td>
-              <td>{item.get('totalPrice')}</td>
-            </tr>)
-          )
-          self.setState({
-            rows
-          })
-          console.log(rows)
         }
       })
-
-      return (<tr>
-        <td>3</td>
-        <td>(923) 234-5322</td>
-        <td>7.00</td>
-      </tr>)
     })
   },
 
@@ -180,90 +146,7 @@ var MatchPage = React.createClass({
             <center><h1 className="page-header">Matches</h1></center>
             <div className="table-responsive">
               <table className="table table-striped">
-                <tbody>
-                  <tr>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>example1@gmail.com</th>
-                          <th>Item URL</th>
-                          <th>Price</th>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>20.00</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>15.00</td>
-                        </tr>
-                      </thead>  
-                    </table>
-                  </tr>
-                  <tr>
-                    <table className="table">
-                      <thead>
-                          <th>example2@gmail.com</th>
-                          <th>Item URL</th>
-                          <th>Price</th>
-                      </thead>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>20.00</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>15.00</td>
-                        </tr>
-                    </table>
-                  </tr>
-                  <tr>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>example3@gmail.com</th>
-                          <th>Item URL</th>
-                          <th>Price</th>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>20.00</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>15.00</td>
-                        </tr>
-                      </thead>  
-                    </table>
-                  </tr>
-                  <tr>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>example4@gmail.com</th>
-                          <th>Item URL</th>
-                          <th>Price</th>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>20.00</td>
-                        </tr>
-                        <tr>
-                          <td></td>
-                          <td>www.amazon.com/example</td>
-                          <td>15.00</td>
-                        </tr>
-                      </thead>  
-                    </table>
-                  </tr>
-                </tbody>
+                  {this.state.rows}
               </table>
             </div>
           </div>
