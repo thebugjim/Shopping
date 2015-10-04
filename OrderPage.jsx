@@ -21,9 +21,16 @@ var OrderPage = React.createClass({
   },
 
   createRequest: function(requestItemUrl, requestItemPrice) {
-    var requestItemUrl = this.state.itemForms.map(function(item) {
-      console.log(item)
-    })
+    var urls = document.getElementsByClassName('itemurl')
+    var requestItemUrl = []
+    for (var i = 0; i < urls.length; i++)
+      requestItemUrl.push(urls[i].value)
+
+    var prices = document.getElementsByClassName('itemprice')
+    var requestItemPrice = []
+    for (var i = 0; i < urls.length; i++)
+      requestItemPrice.push(parseFloat(prices[i].value))
+
 
     // front end does this over a loop
     // requestItemUrl.push( );
@@ -80,6 +87,7 @@ var OrderPage = React.createClass({
     requests.save(null, {
             success: function(requests) {
                  //alert('New object created with objectId: '+requests.id);
+                 location.reload()
             },
             error:function(requests, error) {
                  alert('Failed to create new object '+ error.message);
