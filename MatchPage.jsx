@@ -117,9 +117,9 @@ var MatchPage = React.createClass({
               }
               var rows = self.state.rows
               rows.push(
-                <tr key={Date.now()}>
+                <tr key={Date.now()} style={{backgroundColor: '#00DA71'}}>
                   <td>
-                    <table className="table" style={{tableLayout: 'fixed'}}>
+                    <table className="table" style={{tableLayout: 'fixed', backgroundColor: '#00DA71'}}>
                       <thead>
                         <tr>
                           <th><strong>{results[0].get('email')}</strong></th>

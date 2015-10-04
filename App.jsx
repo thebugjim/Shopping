@@ -56,6 +56,11 @@ var App = React.createClass({
     })
   },
 
+  logout: function() {
+    Parse.User.logOut()
+    location.reload()
+  },
+
   render: function() {
     console.log(this.state.page)
     if (!Parse.User.current())
@@ -65,13 +70,23 @@ var App = React.createClass({
 
     if (this.state.page === 'OrderPage') {
       return (
+        <div>
         <OrderPage />
+        <center><div className="form-inline" role="form">
+            <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.logout}>Logout</button>
+        </div></center>
+        </div>
       )
     }
 
     if (this.state.page === 'MatchPage') {
       return (
+        <div>
         <MatchPage />
+        <center><div className="form-inline" role="form">
+            <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.logout}>Logout</button>
+        </div></center>
+        </div>
       )
     }
 

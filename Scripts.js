@@ -390,13 +390,13 @@ var MatchPage = React.createClass({
               var rows = self.state.rows;
               rows.push(React.createElement(
                 "tr",
-                { key: Date.now() },
+                { key: Date.now(), style: { backgroundColor: '#00DA71' } },
                 React.createElement(
                   "td",
                   null,
                   React.createElement(
                     "table",
-                    { className: "table", style: { tableLayout: 'fixed' } },
+                    { className: "table", style: { tableLayout: 'fixed', backgroundColor: '#00DA71' } },
                     React.createElement(
                       "thead",
                       null,
@@ -702,9 +702,13 @@ var OrderPage = React.createClass({
             'div',
             { className: 'col-sm-offset-2 col-sm-10' },
             React.createElement(
-              'button',
-              { type: 'button', className: 'btn btn-default', onClick: this.generateItemForm },
-              'Add another item'
+              'center',
+              null,
+              React.createElement(
+                'button',
+                { type: 'button', className: 'btn btn-primary', onClick: this.generateItemForm },
+                'Add another item'
+              )
             )
           )
         ),
@@ -712,16 +716,12 @@ var OrderPage = React.createClass({
         React.createElement('br', null),
         React.createElement('br', null),
         React.createElement(
-          'div',
-          { className: 'form-group' },
+          'center',
+          null,
           React.createElement(
-            'div',
-            { className: 'col-sm-offset-2 col-sm-10' },
-            React.createElement(
-              'button',
-              { type: 'submit', className: 'btn btn-default', onClick: this.createRequest },
-              'Submit Order'
-            )
+            'button',
+            { type: 'submit', className: 'btn btn-lg btn-primary', onClick: this.createRequest },
+            'Submit Order'
           ),
           React.createElement(
             'p',
@@ -794,16 +794,55 @@ var App = React.createClass({
     });
   },
 
+  logout: function logout() {
+    Parse.User.logOut();
+    location.reload();
+  },
+
   render: function render() {
     console.log(this.state.page);
     if (!Parse.User.current()) return React.createElement(LoginScreen, null);
 
     if (this.state.page === 'OrderPage') {
-      return React.createElement(OrderPage, null);
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(OrderPage, null),
+        React.createElement(
+          "center",
+          null,
+          React.createElement(
+            "div",
+            { className: "form-inline", role: "form" },
+            React.createElement(
+              "button",
+              { className: "btn btn-lg btn-primary ", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: this.logout },
+              "Logout"
+            )
+          )
+        )
+      );
     }
 
     if (this.state.page === 'MatchPage') {
-      return React.createElement(MatchPage, null);
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(MatchPage, null),
+        React.createElement(
+          "center",
+          null,
+          React.createElement(
+            "div",
+            { className: "form-inline", role: "form" },
+            React.createElement(
+              "button",
+              { className: "btn btn-lg btn-primary ", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: this.logout },
+              "Logout"
+            )
+          )
+        )
+      );
     }
 
     return React.createElement(
