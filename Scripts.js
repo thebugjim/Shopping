@@ -337,7 +337,7 @@ var OrderPage = React.createClass({
   tryToMatch: function tryToMatch() {
     console.log('trying to match');
     var Requests = Parse.Object.extend("Requests");
-    var requests2 = new Parse.Query(Requests);
+    var query = new Parse.Query(Requests);
 
     query.equalTo("status", 0);
 
