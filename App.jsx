@@ -57,6 +57,7 @@ var App = React.createClass({
   },
 
   render: function() {
+    console.log(this.state.page)
     if (!Parse.User.current())
       return (
         <LoginScreen />
@@ -65,6 +66,12 @@ var App = React.createClass({
     if (this.state.page === 'OrderPage') {
       return (
         <OrderPage />
+      )
+    }
+
+    if (this.state.page === 'MatchPage') {
+      return (
+        <MatchPage />
       )
     }
 

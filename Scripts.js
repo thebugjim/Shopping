@@ -234,6 +234,259 @@ var LoginScreen = React.createClass({
     ;
   }
 });
+"use strict";
+
+var MatchPage = React.createClass({
+  displayName: "MatchPage",
+
+  mixins: [ParseReact.Mixin], // Enable query subscriptions
+
+  getInitialState: function getInitialState() {
+    return {
+      itemForms: [],
+      i: 0
+    };
+  },
+
+  observe: function observe() {
+    // Subscribe to all Comment objects, ordered by creation date
+    // The results will be available at this.data.comments
+    return {
+      //comments: (new Parse.Query('Comment')).ascending('createdAt')
+    };
+  },
+
+  componentDidMount: function componentDidMount() {
+    this.generateItemForm();
+  },
+
+  getMatchObjectID: function getMatchObjectID() {
+    var Requests = Parse.Object.extend("Requests");
+    var query = new Parse.Query(Requests);
+
+    var myUserId = Parse.User.current().id;
+
+    query.equalTo("userObjectId", myUserId);
+    query.find({
+      success: function success(results) {
+        if (results.length === 0) {
+          return null;
+        }
+
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          if (object.get('status') == 1) {
+            return object.get('matchObjectId');
+          }
+        }
+
+        return null;
+      }
+    });
+  },
+
+  getMatches: function getMatches() {
+    var Requests = Parse.Object.extend("Requests");
+    var query = new Parse.Query(Requests);
+
+    var matchObjectId = this.getMatchObjectID();
+    if (!matchObjectId) {
+      console.log('match object id is null');
+      return;
+    }
+
+    query.equalTo("matchObjectId", matchObjectId);
+    var self = this;
+    var matches = [];
+    query.find({
+      success: function success(results) {
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          matches.push(object);
+        }
+        self.setState({
+          matches: matches
+        });
+      }
+    });
+  },
+
+  generateRows: function generateRows() {
+
+    return React.createElement(
+      "div",
+      null,
+      this.state.matches.map(function (item) {
+        console.log(item);
+
+        var User = Parse.Object.extend("User");
+        var query = new Parse.Query(User);
+
+        query.equalTo("objectId", item.get('hi'));
+        var self = this;
+        var matches = [];
+        query.find({});
+
+        return React.createElement(
+          "tr",
+          null,
+          React.createElement(
+            "td",
+            null,
+            "3"
+          ),
+          React.createElement(
+            "td",
+            null,
+            "(923) 234-5322"
+          ),
+          React.createElement(
+            "td",
+            null,
+            "7.00"
+          )
+        );
+      })
+    );
+  },
+
+  render: function render() {
+    return React.createElement(
+      "div",
+      { className: "container-fluid" },
+      React.createElement(
+        "div",
+        { className: "row" },
+        React.createElement(
+          "div",
+          { className: "main" },
+          React.createElement(
+            "center",
+            null,
+            React.createElement(
+              "h1",
+              { className: "page-header" },
+              "Matches"
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "table-responsive" },
+            React.createElement(
+              "table",
+              { className: "table table-striped" },
+              React.createElement(
+                "thead",
+                null,
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "th",
+                    null,
+                    "Email"
+                  ),
+                  React.createElement(
+                    "th",
+                    null,
+                    "Phone"
+                  ),
+                  React.createElement(
+                    "th",
+                    null,
+                    "Order Total"
+                  )
+                )
+              ),
+              React.createElement(
+                "tbody",
+                null,
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "td",
+                    null,
+                    "example1@gmail.com"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "(923) 234-5322"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "7.00"
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "td",
+                    null,
+                    "example2@gmail.com"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "(223) 242-2343"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "9.50"
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "td",
+                    null,
+                    "example3@gmail.com"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "(242) 223-5422"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "8.25"
+                  )
+                ),
+                React.createElement(
+                  "tr",
+                  null,
+                  React.createElement(
+                    "td",
+                    null,
+                    "example4@gmail.com"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "(452) 442-3223"
+                  ),
+                  React.createElement(
+                    "td",
+                    null,
+                    "10.00"
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+});
 'use strict';
 
 var OrderPage = React.createClass({
@@ -545,10 +798,15 @@ var App = React.createClass({
   },
 
   render: function render() {
+    console.log(this.state.page);
     if (!Parse.User.current()) return React.createElement(LoginScreen, null);
 
     if (this.state.page === 'OrderPage') {
       return React.createElement(OrderPage, null);
+    }
+
+    if (this.state.page === 'MatchPage') {
+      return React.createElement(MatchPage, null);
     }
 
     return React.createElement(

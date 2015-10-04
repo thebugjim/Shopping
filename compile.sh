@@ -1,1 +1,1 @@
-`babel LoginScreen.jsx OrderPage.jsx App.jsx> Scripts.js`
+`babel LoginScreen.jsx MatchPage.jsx OrderPage.jsx App.jsx> Scripts.js`
