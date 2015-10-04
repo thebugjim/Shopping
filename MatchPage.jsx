@@ -80,6 +80,26 @@ var MatchPage = React.createClass({
     .then(this.generateRows)
   },
 
+  markComplete: function() {
+    this.state.matches.map(function(item) {
+      console.log(item)
+      item.set('status', 2)
+      item.save(null, {
+          success: function(requestItems) {
+
+          },
+          error:function(requestItems, error) {
+              alert('Failed to create new object '+ error.message);
+          }
+      });
+    })
+  },
+
+  logout: function() {
+    Parse.User.logOut()
+    location.reload()
+  },
+
   generateRows: function() {
     if (!this.state || !this.state.matches) return
 
@@ -144,19 +164,25 @@ var MatchPage = React.createClass({
 
   render: function() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="main">
-            <center><h1 className="page-header">Matches</h1></center>
-            <div className="table-responsive">
-              <table className="table table-striped">
-                <tbody>
-                  {this.state.rows}
-                </tbody>
-              </table>
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="main">
+              <center><h1 className="page-header">Matches</h1></center>
+              <div className="table-responsive">
+                <table className="table table-striped">
+                  <tbody>
+                    {this.state.rows}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
+        <center><div className="form-inline" role="form">
+          <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.markComplete}>Mark As Complete</button>
+          <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.logout}>Logout</button>
+        </div></center>
       </div>
     )
   }

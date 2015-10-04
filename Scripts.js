@@ -211,43 +211,48 @@ var LoginScreen = React.createClass({
     // Render the text of each comment as a list item
     return React.createElement(
       'div',
-      { className: 'container' },
+      null,
+      React.createElement('img', { style: { float: 'left', width: '35%', marginLeft: '10px' }, src: 'logo.png' }),
       React.createElement(
         'div',
-        { className: 'form-signin' },
-        React.createElement(
-          'h1',
-          { className: 'form-signin-heading', style: { color: '#000000' } },
-          'Please sign in'
-        ),
-        React.createElement(
-          'label',
-          { htmlFor: 'inputEmail', className: 'sr-only' },
-          'Email address'
-        ),
-        React.createElement('input', { type: 'email', id: 'inputEmail', className: 'form-control', placeholder: 'Username/Email address', required: true, autofocus: true }),
-        React.createElement(
-          'label',
-          { htmlFor: 'inputPassword', className: 'sr-only' },
-          'Password'
-        ),
-        React.createElement('input', { type: 'password', id: 'inputPassword', className: 'form-control', placeholder: 'Password', required: true })
-      ),
-      React.createElement(
-        'center',
-        null,
+        { className: 'container', style: { float: 'right', width: '60%' } },
         React.createElement(
           'div',
-          { className: 'form-inline', role: 'form' },
+          { className: 'form-signin' },
           React.createElement(
-            'button',
-            { className: 'btn btn-lg btn-primary ', style: { backgroundColor: '#FFBC00' }, type: 'submit', onClick: this.handleSignIn },
-            'Sign in'
+            'h1',
+            { className: 'form-signin-heading', style: { color: '#000000' } },
+            'Please sign in'
           ),
           React.createElement(
-            'button',
-            { className: 'btn btn-lg btn-primary', style: { backgroundColor: '#FFBC00' }, type: 'submit', onClick: this.goToSignUp },
-            'Sign up'
+            'label',
+            { htmlFor: 'inputEmail', className: 'sr-only' },
+            'Email address'
+          ),
+          React.createElement('input', { type: 'email', id: 'inputEmail', className: 'form-control', placeholder: 'Username/Email address', required: true, autofocus: true }),
+          React.createElement(
+            'label',
+            { htmlFor: 'inputPassword', className: 'sr-only' },
+            'Password'
+          ),
+          React.createElement('input', { type: 'password', id: 'inputPassword', className: 'form-control', placeholder: 'Password', required: true })
+        ),
+        React.createElement(
+          'center',
+          null,
+          React.createElement(
+            'div',
+            { className: 'form-signin', role: 'form' },
+            React.createElement(
+              'button',
+              { className: 'btn btn-lg btn-primary ', style: { backgroundColor: '#FFBC00' }, type: 'submit', onClick: this.handleSignIn },
+              'Sign in'
+            ),
+            React.createElement(
+              'button',
+              { className: 'btn btn-lg btn-primary', style: { backgroundColor: '#FFBC00' }, type: 'submit', onClick: this.goToSignUp },
+              'Sign up'
+            )
           )
         )
       )
@@ -341,6 +346,24 @@ var MatchPage = React.createClass({
         });
       }
     }).then(this.generateRows);
+  },
+
+  markComplete: function markComplete() {
+    this.state.matches.map(function (item) {
+      console.log(item);
+      item.set('status', 2);
+      item.save(null, {
+        success: function success(requestItems) {},
+        error: function error(requestItems, _error) {
+          alert('Failed to create new object ' + _error.message);
+        }
+      });
+    });
+  },
+
+  logout: function logout() {
+    Parse.User.logOut();
+    location.reload();
   },
 
   generateRows: function generateRows() {
@@ -449,34 +472,56 @@ var MatchPage = React.createClass({
   render: function render() {
     return React.createElement(
       "div",
-      { className: "container-fluid" },
+      null,
       React.createElement(
         "div",
-        { className: "row" },
+        { className: "container-fluid" },
         React.createElement(
           "div",
-          { className: "main" },
-          React.createElement(
-            "center",
-            null,
-            React.createElement(
-              "h1",
-              { className: "page-header" },
-              "Matches"
-            )
-          ),
+          { className: "row" },
           React.createElement(
             "div",
-            { className: "table-responsive" },
+            { className: "main" },
             React.createElement(
-              "table",
-              { className: "table table-striped" },
+              "center",
+              null,
               React.createElement(
-                "tbody",
-                null,
-                this.state.rows
+                "h1",
+                { className: "page-header" },
+                "Matches"
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "table-responsive" },
+              React.createElement(
+                "table",
+                { className: "table table-striped" },
+                React.createElement(
+                  "tbody",
+                  null,
+                  this.state.rows
+                )
               )
             )
+          )
+        )
+      ),
+      React.createElement(
+        "center",
+        null,
+        React.createElement(
+          "div",
+          { className: "form-inline", role: "form" },
+          React.createElement(
+            "button",
+            { className: "btn btn-lg btn-primary ", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: this.markComplete },
+            "Mark As Complete"
+          ),
+          React.createElement(
+            "button",
+            { className: "btn btn-lg btn-primary ", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: this.logout },
+            "Logout"
           )
         )
       )
@@ -784,12 +829,17 @@ var App = React.createClass({
             });
             return;
           }
-          // //display the pending request page
-          // self.setState({
-          //   page: 'PendingPage'
-          // })
-          // return;
+          if (object.get('status') == 0) {
+            //display the pending request page
+            self.setState({
+              page: 'PendingPage'
+            });
+            return;
+          }
         }
+        self.setState({
+          page: 'OrderPage'
+        });
       }
     });
   },
@@ -828,20 +878,7 @@ var App = React.createClass({
       return React.createElement(
         "div",
         null,
-        React.createElement(MatchPage, null),
-        React.createElement(
-          "center",
-          null,
-          React.createElement(
-            "div",
-            { className: "form-inline", role: "form" },
-            React.createElement(
-              "button",
-              { className: "btn btn-lg btn-primary ", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: this.logout },
-              "Logout"
-            )
-          )
-        )
+        React.createElement(MatchPage, null)
       );
     }
 

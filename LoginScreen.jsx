@@ -124,18 +124,21 @@ var LoginScreen = React.createClass({
 
     // Render the text of each comment as a list item
     return (
-      <div className="container">
-        <div className="form-signin">
-          <h1 className="form-signin-heading" style={{color: '#000000'}}>Please sign in</h1>
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input type="email" id="inputEmail" className="form-control" placeholder="Username/Email address" required autofocus/>
-          <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/>
+      <div>
+        <img style={{float: 'left', width: '35%', marginLeft: '10px'}} src='logo.png'/>
+        <div className="container" style={{float: 'right', width: '60%'}}>
+          <div className="form-signin">
+            <h1 className="form-signin-heading" style={{color: '#000000'}}>Please sign in</h1>
+            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <input type="email" id="inputEmail" className="form-control" placeholder="Username/Email address" required autofocus/>
+            <label htmlFor="inputPassword" className="sr-only">Password</label>
+            <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/>
+          </div>
+          <center><div className="form-signin" role="form">
+              <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.handleSignIn}>Sign in</button>
+              <button className="btn btn-lg btn-primary" style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.goToSignUp}>Sign up</button>
+          </div></center>
         </div>
-        <center><div className="form-inline" role="form">
-            <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.handleSignIn}>Sign in</button>
-            <button className="btn btn-lg btn-primary" style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.goToSignUp}>Sign up</button>
-        </div></center>
       </div>
       // <ul>
       //   {this.data.comments.map(function(c) {

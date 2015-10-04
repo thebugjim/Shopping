@@ -46,12 +46,17 @@ var App = React.createClass({
             })
             return;
           }
-          // //display the pending request page
-          // self.setState({
-          //   page: 'PendingPage'
-          // })
-          // return;
+          if (object.get('status') == 0) {
+          //display the pending request page
+            self.setState({
+              page: 'PendingPage'
+            })
+            return;
+          }
         }
+        self.setState({
+          page: 'OrderPage'
+        })
       },
     })
   },
@@ -83,9 +88,6 @@ var App = React.createClass({
       return (
         <div>
         <MatchPage />
-        <center><div className="form-inline" role="form">
-            <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.logout}>Logout</button>
-        </div></center>
         </div>
       )
     }
