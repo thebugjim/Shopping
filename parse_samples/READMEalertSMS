@@ -1,0 +1,23 @@
+a readme about how to use alertSMS.js
+
+Password: SDhacks2015
+
+For testing:
+1) 'key': 'DwBPuASHFHNIc37ez2gauA'
+   'from_email': 'connie.chiang94@gmail.com'
+2) 'key': 'mLBd8e8U1PR4UspmZxCrBg'
+   'from_email': 'ccc003@ucsd.edu'
+For demo:
+1) 'key': '43T19R44hCxrOX-pMxMynw' 
+   'from_email': 'bundle.me1@gmail.com'
+2) 'key': '9y29AdrbZJLK86OUrgCDbw'
+   'from_email': 'bundle.me2@gmail.com'
+3) 'key': 'Tjh6wumeVEoaz8_sHGCYNQ'
+   'from_email': 'bundle.me3@gmail.com'
+
+Create DB Table to keep track of sendsPerHouse, key, from_email
+Update DB User Table -- carrier (T-Mobile, AT&T, Verizon, Sprint)
+AT&T: [insert 10-digit number] @txt.att.net
+Sprint: [insert 10-digit number] @messaging.sprintpcs.com
+T-mobile: [insert 10-digit number] @tmomail.net
+Verizon: [insert 10-digit number] @vtext.com
