@@ -100,12 +100,12 @@ var MatchPage = React.createClass({
           query2.equalTo("userObjectId", item.get('userObjectId'));
           query2.find({
 
-            success: function(results) {
+            success: function(results2) {
               var items = []
 
-              for(var i = 0; i < results.length; i++)
+              for(var i = 0; i < results2.length; i++)
               {
-                var object = results[i];
+                var object = results2[i];
                 var url = object.get("url");
                 var itemprice = object.get("itemPrice");
                 //display this item
@@ -119,14 +119,17 @@ var MatchPage = React.createClass({
               rows.push(
                 <tr key={Date.now()}>
                   <td>
-                  <table className="table">
-                    <tr>
-                      <th>example1@gmail.com</th>
-                      <th>Item URL</th>
-                      <th>Price</th>
-                    </tr>
-                    {items}
-                  </table></td>
+                    <table className="table" style={{tableLayout: 'fixed'}}>
+                      <thead>
+                        <tr>
+                          <th><strong>{results[0].get('email')}</strong></th>
+                          <th><strong>Item URL</strong></th>
+                          <th><strong>Price</strong></th>
+                        </tr>
+                      </thead>
+                      {items}
+                    </table>
+                  </td>
                 </tr>
               )
               self.setState({
@@ -147,7 +150,9 @@ var MatchPage = React.createClass({
             <center><h1 className="page-header">Matches</h1></center>
             <div className="table-responsive">
               <table className="table table-striped">
+                <tbody>
                   {this.state.rows}
+                </tbody>
               </table>
             </div>
           </div>
