@@ -624,32 +624,36 @@ var OrderPage = React.createClass({
       'div',
       { className: 'form-inline', key: this.state.i++ },
       React.createElement(
-        'div',
-        { className: 'form-group' },
+        'center',
+        null,
         React.createElement(
-          'label',
-          { htmlFor: 'orderurl' },
-          'Order URL'
-        ),
-        React.createElement('input', { type: 'url', className: 'form-control itemurl', size: '50%', placeholder: 'www.amazon.com/example' })
-      ),
-      React.createElement(
-        'div',
-        { className: 'form-group' },
-        React.createElement(
-          'label',
-          { htmlFor: 'price' },
-          'Price'
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'label',
+            { htmlFor: 'orderurl', style: { color: "#000000" } },
+            'Order URL'
+          ),
+          React.createElement('input', { type: 'url', className: 'form-control itemurl', size: '200%', placeholder: 'www.amazon.com/example' })
         ),
         React.createElement(
           'div',
-          { className: 'input-group' },
+          { className: 'form-group' },
+          React.createElement(
+            'label',
+            { htmlFor: 'price', style: { color: "#000000" } },
+            'Price'
+          ),
           React.createElement(
             'div',
-            { className: 'input-group-addon' },
-            '$'
-          ),
-          React.createElement('input', { type: 'text', className: 'form-control itemprice', size: '4', placeholder: 'XX.XX' })
+            { className: 'input-group' },
+            React.createElement(
+              'div',
+              { className: 'input-group-addon' },
+              '$'
+            ),
+            React.createElement('input', { type: 'text', className: 'form-control itemprice', size: '4', placeholder: 'XX.XX' })
+          )
         )
       )
     );
@@ -671,7 +675,7 @@ var OrderPage = React.createClass({
         null,
         React.createElement(
           'h2',
-          null,
+          { style: { color: "#000000" } },
           'Welcome to BundleMe'
         )
       ),
@@ -682,7 +686,7 @@ var OrderPage = React.createClass({
         null,
         React.createElement(
           'h3',
-          null,
+          { style: { color: "#000000" } },
           'Add an order'
         )
       ),
@@ -699,11 +703,11 @@ var OrderPage = React.createClass({
           'div',
           { className: 'form-group' },
           React.createElement(
-            'div',
-            { className: 'col-sm-offset-2 col-sm-10' },
+            'center',
+            null,
             React.createElement(
               'button',
-              { type: 'button', className: 'btn btn-default', onClick: this.generateItemForm },
+              { type: 'button', style: { backgroundColor: "#FFBC00" }, className: 'btn btn-primary', onClick: this.generateItemForm },
               'Add another item'
             )
           )
@@ -712,20 +716,16 @@ var OrderPage = React.createClass({
         React.createElement('br', null),
         React.createElement('br', null),
         React.createElement(
-          'div',
-          { className: 'form-group' },
+          'center',
+          null,
           React.createElement(
-            'div',
-            { className: 'col-sm-offset-2 col-sm-10' },
-            React.createElement(
-              'button',
-              { type: 'submit', className: 'btn btn-default', onClick: this.createRequest },
-              'Submit Order'
-            )
+            'button',
+            { type: 'submit', style: { backgroundColor: "#FFBC00" }, className: 'btn btn-lg btn-primary', onClick: this.createRequest },
+            'Submit Order'
           ),
           React.createElement(
             'p',
-            null,
+            { style: { color: "#000000" } },
             'Note: total of orders must be at least $7.00'
           )
         )
