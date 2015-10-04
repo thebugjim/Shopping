@@ -369,6 +369,21 @@ var MatchPage = React.createClass({
       query.equalTo("objectId", item.get('userObjectId'));
       query.find({
         success: function success(results) {
+
+          var RequestItems = Parse.Object.extend("RequestItems");
+          var query2 = new Parse.Query(RequestItems);
+          query2.equalTo("userObjectId", item.get('userObjectId'));
+          query2.find({
+            success: function success(results) {
+              for (i = 0; i < results.length; i++) {
+                var object = results[i];
+                var url = object.get("url");
+                var itemprice = object.get("itemPrice");
+                //display this item
+              }
+            }
+          });
+
           var rows = self.state.rows;
           rows.push(React.createElement(
             "tr",
