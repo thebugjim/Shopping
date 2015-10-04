@@ -243,8 +243,7 @@ var MatchPage = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      itemForms: [],
-      i: 0
+      rows: []
     };
   },
 
@@ -257,16 +256,17 @@ var MatchPage = React.createClass({
   },
 
   componentDidMount: function componentDidMount() {
-    this.generateItemForm();
+    this.getMatchedObjectID();
   },
 
-  getMatchObjectID: function getMatchObjectID() {
+  getMatchedObjectID: function getMatchedObjectID() {
     var Requests = Parse.Object.extend("Requests");
     var query = new Parse.Query(Requests);
 
     var myUserId = Parse.User.current().id;
 
     query.equalTo("userObjectId", myUserId);
+    var self = this;
     query.find({
       success: function success(results) {
         if (results.length === 0) {
@@ -277,79 +277,107 @@ var MatchPage = React.createClass({
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           if (object.get('status') == 1) {
-            return object.get('matchObjectId');
+            console.log(object.get('matchedObjectId'));
+            self.setState({
+              matchedObjectId: object.get('matchedObjectId')
+            });
           }
         }
-
         return null;
       }
-    });
+    }).then(this.getMatches);
   },
 
   getMatches: function getMatches() {
     var Requests = Parse.Object.extend("Requests");
     var query = new Parse.Query(Requests);
 
-    var matchObjectId = this.getMatchObjectID();
-    if (!matchObjectId) {
+    var matchedObjectId = this.state.matchedObjectId;
+    if (!matchedObjectId) {
       console.log('match object id is null');
       return;
     }
 
-    query.equalTo("matchObjectId", matchObjectId);
+    query.equalTo("matchedObjectId", matchedObjectId);
     var self = this;
     var matches = [];
+    console.log('aaaa', matchedObjectId);
     query.find({
       success: function success(results) {
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           matches.push(object);
+          console.log(object);
         }
         self.setState({
           matches: matches
         });
       }
-    });
+    }).then(this.generateRows);
   },
 
   generateRows: function generateRows() {
+    if (!this.state || !this.state.matches) return;
 
-    return React.createElement(
-      "div",
-      null,
-      this.state.matches.map(function (item) {
-        console.log(item);
+    var self = this;
 
-        var User = Parse.Object.extend("User");
-        var query = new Parse.Query(User);
+    this.state.matches.map(function (item) {
+      console.log(item);
 
-        query.equalTo("objectId", item.get('hi'));
-        var self = this;
-        var matches = [];
-        query.find({});
+      var User = Parse.Object.extend("User");
+      var query = new Parse.Query(User);
 
-        return React.createElement(
-          "tr",
+      query.equalTo("objectId", item.get('userObjectId'));
+      query.find({
+        success: function success(results) {
+          var rows = self.state.rows;
+          rows.push(React.createElement(
+            "tr",
+            null,
+            React.createElement(
+              "td",
+              null,
+              results[0].get('email')
+            ),
+            React.createElement(
+              "td",
+              null,
+              results[0].get('phoneNumber')
+            ),
+            React.createElement(
+              "td",
+              null,
+              item.get('totalPrice')
+            )
+          ));
+          self.setState({
+            rows: rows
+          });
+          console.log(rows);
+        }
+      });
+
+      return React.createElement(
+        "tr",
+        null,
+        React.createElement(
+          "td",
           null,
-          React.createElement(
-            "td",
-            null,
-            "3"
-          ),
-          React.createElement(
-            "td",
-            null,
-            "(923) 234-5322"
-          ),
-          React.createElement(
-            "td",
-            null,
-            "7.00"
-          )
-        );
-      })
-    );
+          "3"
+        ),
+        React.createElement(
+          "td",
+          null,
+          "(923) 234-5322"
+        ),
+        React.createElement(
+          "td",
+          null,
+          "7.00"
+        )
+      );
+    });
   },
 
   render: function render() {
@@ -403,82 +431,7 @@ var MatchPage = React.createClass({
               React.createElement(
                 "tbody",
                 null,
-                React.createElement(
-                  "tr",
-                  null,
-                  React.createElement(
-                    "td",
-                    null,
-                    "example1@gmail.com"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "(923) 234-5322"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "7.00"
-                  )
-                ),
-                React.createElement(
-                  "tr",
-                  null,
-                  React.createElement(
-                    "td",
-                    null,
-                    "example2@gmail.com"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "(223) 242-2343"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "9.50"
-                  )
-                ),
-                React.createElement(
-                  "tr",
-                  null,
-                  React.createElement(
-                    "td",
-                    null,
-                    "example3@gmail.com"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "(242) 223-5422"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "8.25"
-                  )
-                ),
-                React.createElement(
-                  "tr",
-                  null,
-                  React.createElement(
-                    "td",
-                    null,
-                    "example4@gmail.com"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "(452) 442-3223"
-                  ),
-                  React.createElement(
-                    "td",
-                    null,
-                    "10.00"
-                  )
-                )
+                this.state.rows
               )
             )
           )
