@@ -212,6 +212,15 @@ var LoginScreen = React.createClass({
     return React.createElement(
       'div',
       null,
+      React.createElement(
+        'center',
+        null,
+        React.createElement(
+          'h1',
+          null,
+          'BundleMe'
+        )
+      ),
       React.createElement('img', { style: { float: 'left', width: '35%', marginLeft: '10px' }, src: 'logo.png' }),
       React.createElement(
         'div',
@@ -910,6 +919,11 @@ var App = React.createClass({
       React.createElement(
         "button",
         { onClick: this.logout },
+        "Logout"
+      ),
+      React.createElement(
+        "button",
+        { className: "btn btn-lg btn-primary", style: { backgroundColor: '#FFBC00' }, type: "submit", onClick: Parse.User.logOut },
         "Logout"
       )
     );

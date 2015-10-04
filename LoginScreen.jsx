@@ -125,6 +125,7 @@ var LoginScreen = React.createClass({
     // Render the text of each comment as a list item
     return (
       <div>
+        <center><h1>BundleMe</h1></center>
         <img style={{float: 'left', width: '35%', marginLeft: '10px'}} src='logo.png'/>
         <div className="container" style={{float: 'right', width: '60%'}}>
           <div className="form-signin">
