@@ -84,6 +84,7 @@ var OrderPage = React.createClass({
     // update total price for the request
 
     requests.set('totalPrice', myTotalPrice);
+    requests.set('status', 0)
     var self = this;
     requests.save(null, {
             success: function(requests) {
