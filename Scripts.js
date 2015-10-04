@@ -327,7 +327,6 @@ var OrderPage = React.createClass({
       success: function success(requests) {
         //alert('New object created with objectId: '+requests.id);
         self.tryToMatch();
-        location.reload();
       },
       error: function error(requests, _error3) {
         alert('Failed to create new object ' + _error3.message);
@@ -346,7 +345,7 @@ var OrderPage = React.createClass({
     query.find({
       success: function success(results) {
 
-        var matchedObjectId;
+        var matchedObjectId = '';
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           matchedPrice += object.get('totalPrice');
@@ -365,6 +364,8 @@ var OrderPage = React.createClass({
       error: function error(_error4) {
         alert("Error: " + _error4.code + " " + _error4.message);
       }
+    }).then(function () {
+      location.reload();
     });
   },
 
