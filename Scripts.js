@@ -152,6 +152,44 @@ var LoginScreen = React.createClass({
         React.createElement(
           'div',
           { className: 'form-group' },
+          React.createElement(
+            'label',
+            { htmlFor: 'carrier', className: 'col-sm-5 control-label', style: { color: '#000000' } },
+            'Carrier'
+          ),
+          React.createElement(
+            'div',
+            { className: 'col-sm-7' },
+            React.createElement(
+              'select',
+              { id: 'carrier', className: 'form-control', style: { width: '90px' } },
+              React.createElement('option', null),
+              React.createElement(
+                'option',
+                null,
+                'AT&T'
+              ),
+              React.createElement(
+                'option',
+                null,
+                'Sprint'
+              ),
+              React.createElement(
+                'option',
+                null,
+                'T-Mobile'
+              ),
+              React.createElement(
+                'option',
+                null,
+                'Verizon'
+              )
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'form-group' },
           React.createElement('div', { className: 'col-sm-offset-2 col-sm-10' })
         ),
         React.createElement(
@@ -540,27 +578,25 @@ var OrderPage = React.createClass({
     });
   },
 
-  tryToMatch: function() {
-    console.log('trying to match')
+  tryToMatch: function tryToMatch() {
+    console.log('trying to match');
     var Requests = Parse.Object.extend("Requests");
     var query = new Parse.Query(Requests);
 
-    query.equalTo("status", 0)
+    query.equalTo("status", 0);
 
     var matchedPrice = 0;
     var matchedObjectId = "matched";
     query.find({
-      success: function(results) {
+      success: function success(results) {
 
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           matchedPrice += object.get('totalPrice');
           var concat = object.get('userObjectId');
           matchedObjectId += concat;
-          if(matchedPrice >= 35)
-          {
-            for (i; i >= 0; i--)
-            {
+          if (matchedPrice >= 35) {
+            for (i; i >= 0; i--) {
               var object = results[i];
               object.set("status", 1);
               object.set("matchedObjectId", matchedObjectId);
@@ -570,12 +606,11 @@ var OrderPage = React.createClass({
           }
         }
       },
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
+      error: function error(_error4) {
+        alert("Error: " + _error4.code + " " + _error4.message);
       }
-    })
-    .then(function() {
-      location.reload()
+    }).then(function () {
+      location.reload();
     });
   },
 

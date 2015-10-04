@@ -99,6 +99,18 @@ var LoginScreen = React.createClass({
               </div>
             </div>
             <div className="form-group">
+              <label htmlFor="carrier" className="col-sm-5 control-label" style={{color: '#000000'}}>Carrier</label>
+              <div className="col-sm-7">
+                <select id="carrier" className="form-control" style={{width: '90px'}}>
+                  <option></option>
+                  <option>AT&T</option>
+                  <option>Sprint</option>
+                  <option>T-Mobile</option>
+                  <option>Verizon</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10">
               </div>
             </div>
