@@ -84,14 +84,51 @@ var OrderPage = React.createClass({
     // update total price for the request
 
     requests.set('totalPrice', myTotalPrice);
+    var self = this;
     requests.save(null, {
             success: function(requests) {
                  //alert('New object created with objectId: '+requests.id);
+                 self.tryToMatch()
                  location.reload()
             },
             error:function(requests, error) {
                  alert('Failed to create new object '+ error.message);
             }
+    });
+  },
+
+  tryToMatch: function() {
+    console.log('trying to match')
+    var Requests = Parse.Object.extend("Requests");
+    var requests2 = new Parse.Query(Requests);
+
+    query.equalTo("status", 0)
+
+    var matchedPrice = 0;
+    query.find({
+      success: function(results) {
+
+        var matchedObjectId;
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          matchedPrice += object.get('totalPrice');
+          matchedObjectId += object.get('objectId');
+          if(matchedPrice >= 35)
+          {
+            for (i; i >= 0; i--)
+            {
+              var object = results[i];
+              object.set("status", 1);
+              object.set("matchedObjectId", matchedObjectId);
+              object.save();
+            }
+            break;
+          }
+        }
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
     });
   },
 
