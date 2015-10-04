@@ -179,18 +179,16 @@ tryToMatch: function() {
             </div>
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10">
-                <button type="button" className="btn btn-default" onClick={this.generateItemForm}>Add another item</button>
+                <center><button type="button" className="btn btn-primary" onClick={this.generateItemForm}>Add another item</button></center>
               </div>
             </div>
             <br/>
             <br/>
             <br/>
-            <div className="form-group">
-              <div className="col-sm-offset-2 col-sm-10">
-                <button type="submit" className="btn btn-default" onClick={this.createRequest}>Submit Order</button>
-              </div>
+            <center>
+              <button type="submit" className="btn btn-lg btn-primary" onClick={this.createRequest}>Submit Order</button>
               <p>Note: total of orders must be at least $7.00</p>
-            </div>
+            </center>
         </div>
       </div>
     )

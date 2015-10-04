@@ -70,7 +70,6 @@ var LoginScreen = React.createClass({
       'div',
       null,
       React.createElement('br', null),
-      React.createElement('br', null),
       React.createElement(
         'div',
         { className: 'form-horizontal' },
@@ -79,22 +78,23 @@ var LoginScreen = React.createClass({
           null,
           React.createElement(
             'h2',
-            null,
-            'Sign up htmlFor BundleMe'
+            { style: { color: '#000000' } },
+            'Sign up for BundleMe'
           )
         ),
+        React.createElement('br', null),
         React.createElement(
           'div',
           { className: 'form-group' },
           React.createElement(
             'label',
-            { htmlFor: 'inputEmail3', className: 'col-sm-2 control-label' },
+            { htmlFor: 'inputEmail3', style: { color: '#000000' }, className: 'col-sm-5 control-label' },
             'Email'
           ),
           React.createElement(
             'div',
-            { className: 'col-sm-10' },
-            React.createElement('input', { type: 'email', className: 'form-control', id: 'inputEmail3', placeholder: 'Email' })
+            { className: 'col-sm-7' },
+            React.createElement('input', { type: 'email', className: 'form-control', style: { width: "25%" }, id: 'inputEmail3', placeholder: 'example@gmail.com' })
           )
         ),
         React.createElement(
@@ -102,23 +102,23 @@ var LoginScreen = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { htmlFor: 'inputPassword3', className: 'col-sm-2 control-label' },
+            { htmlFor: 'inputPassword3', style: { color: '#000000' }, className: 'col-sm-5 control-label' },
             'Password'
           ),
           React.createElement(
             'div',
-            { className: 'col-sm-10' },
-            React.createElement('input', { type: 'password', className: 'form-control', id: 'inputPassword3', placeholder: 'Password' })
+            { className: 'col-sm-7' },
+            React.createElement('input', { type: 'password', className: 'form-control', style: { width: "25%" }, id: 'inputPassword3', placeholder: 'Password' })
           ),
           React.createElement(
             'label',
-            { htmlFor: 'inputPassword3', className: 'col-sm-2 control-label' },
+            { htmlFor: 'inputPassword3', className: 'col-sm-5 control-label' },
             'Confirm Password'
           ),
           React.createElement(
             'div',
-            { className: 'col-sm-10' },
-            React.createElement('input', { type: 'password', className: 'form-control', id: 'inputPassword3-2', placeholder: 'Password' })
+            { className: 'col-sm-7' },
+            React.createElement('input', { type: 'password', className: 'form-control', style: { width: "25%" }, id: 'inputPassword3-2', placeholder: 'Password' })
           )
         ),
         React.createElement(
@@ -126,13 +126,13 @@ var LoginScreen = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { htmlFor: 'inputzip', className: 'col-sm-2 control-label' },
+            { htmlFor: 'inputzip', style: { color: '#000000' }, className: 'col-sm-5 control-label' },
             'Zip Code'
           ),
           React.createElement(
             'div',
-            { className: 'col-sm-10' },
-            React.createElement('input', { type: 'text', className: 'form-control', id: 'zipcode', size: '5', placeholder: 'Zip Code' })
+            { className: 'col-sm-7' },
+            React.createElement('input', { type: 'text', className: 'form-control', id: 'zipcode', style: { width: "70px" }, placeholder: 'XXXXX', maxlength: '5' })
           )
         ),
         React.createElement(
@@ -140,13 +140,13 @@ var LoginScreen = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { htmlFor: 'inputphone', className: 'col-sm-2 control-label' },
+            { htmlFor: 'inputphone', style: { color: '#000000' }, className: 'col-sm-5 control-label' },
             'Phone Number'
           ),
           React.createElement(
             'div',
-            { className: 'col-sm-10' },
-            React.createElement('input', { type: 'tel', className: 'form-control', id: 'phonenumber', placeholder: 'Phone Number' })
+            { className: 'col-sm-7' },
+            React.createElement('input', { type: 'tel', className: 'form-control', style: { width: "130px" }, id: 'phonenumber', placeholder: '(XXX) XXX-XXXX' })
           )
         ),
         React.createElement(
@@ -154,7 +154,7 @@ var LoginScreen = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { htmlFor: 'carrier', className: 'col-sm-5 control-label', style: { color: '#000000' } },
+            { htmlFor: 'carrier', style: { color: '#000000' }, className: 'col-sm-5 control-label', style: { color: '#000000' } },
             'Carrier'
           ),
           React.createElement(
@@ -196,11 +196,11 @@ var LoginScreen = React.createClass({
           'div',
           { className: 'form-group' },
           React.createElement(
-            'div',
-            { className: 'col-sm-offset-2 col-sm-10' },
+            'center',
+            null,
             React.createElement(
               'button',
-              { type: 'submit', className: 'btn btn-default', onClick: this.handleSignUp },
+              { type: 'submit', style: { backgroundColor: '#FFBC00' }, className: 'btn btn-lg btn-primary', onClick: this.handleSignUp },
               'Sign up'
             )
           )

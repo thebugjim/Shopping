@@ -67,39 +67,39 @@ var LoginScreen = React.createClass({
       return (
         <div>
           <br/>
-          <br/>
           <div className="form-horizontal">
-            <center><h2>Sign up htmlFor BundleMe</h2></center>
+            <center><h2 style={{color: '#000000'}}>Sign up for BundleMe</h2></center>
+            <br/>
             <div className="form-group">
-              <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
-              <div className="col-sm-10">
-                <input type="email" className="form-control" id="inputEmail3" placeholder="Email"/>
+              <label htmlFor="inputEmail3" style={{color: '#000000'}} className="col-sm-5 control-label">Email</label>
+              <div className="col-sm-7">
+                <input type="email" className="form-control" style={{width: "25%"}} id="inputEmail3" placeholder="example@gmail.com"/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
-              <div className="col-sm-10">
-                <input type="password" className="form-control" id="inputPassword3" placeholder="Password"/>
+              <label htmlFor="inputPassword3" style={{color: '#000000'}} className="col-sm-5 control-label">Password</label>
+              <div className="col-sm-7">
+                <input type="password" className="form-control" style={{width: "25%"}} id="inputPassword3" placeholder="Password"/>
               </div>
-              <label htmlFor="inputPassword3" className="col-sm-2 control-label">Confirm Password</label>
-              <div className="col-sm-10">
-                <input type="password" className="form-control" id="inputPassword3-2" placeholder="Password"/>
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="inputzip" className="col-sm-2 control-label">Zip Code</label>
-              <div className="col-sm-10">
-                <input type="text" className="form-control" id="zipcode" size="5" placeholder="Zip Code"/>
+              <label htmlFor="inputPassword3" className="col-sm-5 control-label">Confirm Password</label>
+              <div className="col-sm-7">
+                <input type="password" className="form-control" style={{width: "25%"}} id="inputPassword3-2" placeholder="Password"/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="inputphone" className="col-sm-2 control-label">Phone Number</label>
-              <div className="col-sm-10">
-                <input type="tel" className="form-control" id="phonenumber" placeholder="Phone Number"/>
+              <label htmlFor="inputzip" style={{color: '#000000'}} className="col-sm-5 control-label">Zip Code</label>
+              <div className="col-sm-7">
+                <input type="text" className="form-control" id="zipcode" style={{width: "70px"}} placeholder="XXXXX" maxlength="5"/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="carrier" className="col-sm-5 control-label" style={{color: '#000000'}}>Carrier</label>
+              <label htmlFor="inputphone" style={{color: '#000000'}} className="col-sm-5 control-label">Phone Number</label>
+              <div className="col-sm-7">
+                <input type="tel" className="form-control" style={{width: "130px"}} id="phonenumber" placeholder="(XXX) XXX-XXXX"/>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="carrier" style={{color: '#000000'}} className="col-sm-5 control-label" style={{color: '#000000'}}>Carrier</label>
               <div className="col-sm-7">
                 <select id="carrier" className="form-control" style={{width: '90px'}}>
                   <option></option>
@@ -115,9 +115,7 @@ var LoginScreen = React.createClass({
               </div>
             </div>
             <div className="form-group">
-              <div className="col-sm-offset-2 col-sm-10">
-                <button type="submit" className="btn btn-default" onClick={this.handleSignUp}>Sign up</button>
-              </div>
+              <center><button type="submit" style={{backgroundColor: '#FFBC00'}} className="btn btn-lg btn-primary" onClick={this.handleSignUp}>Sign up</button></center>
             </div>
           </div>
         </div>
