@@ -97,7 +97,8 @@ var OrderPage = React.createClass({
     });
   },
 
-  tryToMatch: function() {
+
+tryToMatch: function() {
     console.log('trying to match')
     var Requests = Parse.Object.extend("Requests");
     var query = new Parse.Query(Requests);
@@ -105,14 +106,15 @@ var OrderPage = React.createClass({
     query.equalTo("status", 0)
 
     var matchedPrice = 0;
+    var matchedObjectId = "matched";
     query.find({
       success: function(results) {
 
-        var matchedObjectId = '';
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           matchedPrice += object.get('totalPrice');
-          matchedObjectId += object.get('objectId');
+          var concat = object.get('userObjectId');
+          matchedObjectId += concat;
           if(matchedPrice >= 35)
           {
             for (i; i >= 0; i--)

@@ -25,46 +25,46 @@
   <body style="background-color: #33CC33">
     <br/>
     <br/>
-    <form class="form-horizontal">
-    <center><h2 style="color: #000000">Sign up for BundleMe</h2></center>
-    <div class="form-group">
-      <label for="inputEmail3" class="col-sm-2 control-label" style="color: #000000">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+    <form class="form-horizontal" id="new">
+      <center><h2 style="color: #000000">Sign up for BundleMe</h2></center>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-5 control-label" style="color: #000000">Email</label>
+        <div class="col-sm-7">
+          <input type="email" class="form-control" id="inputEmail3" style="width: 25%" placeholder="example@gmail.com">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword3" class="col-sm-2 control-label" style="color: #000000">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-5 control-label" style="color: #000000">Password</label>
+        <div class="col-sm-7">
+          <input type="password" class="form-control" id="inputPassword3" style="width: 25%" placeholder="Password">
+        </div>
+        <label for="inputPassword3-2" class="col-sm-5 control-label" style="color: #000000">Confirm Password</label>
+        <div class="col-sm-7">
+          <input type="password" class="form-control" id="inputPassword3-2" style="width: 25%" placeholder="Password">
+        </div>
       </div>
-      <label for="inputPassword3" class="col-sm-2 control-label" style="color: #000000">Confirm Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3-2" placeholder="Password">
+      <div class="form-group">
+        <label for="inputzip" class="col-sm-5 control-label" style="color: #000000">Zip Code</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" id="zipcode" style="width: 70px" placeholder="XXXXX" maxlength="5">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputzip" class="col-sm-2 control-label" style="color: #000000">Zip Code</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="zipcode" size="5" placeholder="Zip Code">
+      <div class="form-group">
+        <label for="inputphone" class="col-sm-5 control-label" style="color: #000000">Phone Number</label>
+        <div class="col-sm-7">
+          <input type="tel" class="form-control" id="phonenumber" style="width: 130px" placeholder="(XXX) XXX-XXXX" maxlength="14">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputphone" class="col-sm-2 control-label" style="color: #000000">Phone Number</label>
-      <div class="col-sm-10">
-        <input type="tel" class="form-control" id="phonenumber" placeholder="Phone Number">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
+
+      <div class="form-group">
+        <center><button type="submit" class="btn btn-lg btn-primary" style="background-color: black;">Sign Up</button></center>
       </div>
-    </div>
-    <div class="form-group">
-      <center>
-        <button type="submit" class="btn btn-lg btn-primary" style="background-color: black;">Sign Up</button>
-      </center>
-    </div>
-</form>
+    </form>
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
