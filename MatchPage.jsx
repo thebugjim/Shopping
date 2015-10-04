@@ -81,18 +81,21 @@ var MatchPage = React.createClass({
   },
 
   markComplete: function() {
-    this.state.matches.map(function(item) {
-      console.log(item)
-      item.set('status', 2)
-      item.save(null, {
-          success: function(requestItems) {
+    for (var i = 0; i < this.state.matches.length; i++) {
+      var match = this.state.matches[i]
 
-          },
-          error:function(requestItems, error) {
-              alert('Failed to create new object '+ error.message);
+      match.set('status', 2)
+
+      var toRefresh = (i === this.state.matches.length - 1)
+
+      match.save(null, {
+        success: function(items) {
+          if (toRefresh) {
+            location.reload()
           }
-      });
-    })
+        }
+      })
+    }
   },
 
   logout: function() {

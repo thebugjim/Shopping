@@ -98,7 +98,7 @@ var App = React.createClass({
           <h1 style={{color: '#000000'}}>Sorry, you have not been matched yet...</h1>
           <p className="lead" style={{color: '#000000'}}>Please check back soon!</p>
         </div>
-        <button onClick={Parse.User.logOut}>Logout</button>
+        <button onClick={this.logout}>Logout</button>
       </div>
     )
   }

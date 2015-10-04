@@ -38,6 +38,7 @@ var OrderPage = React.createClass({
     // FRONT-END TODO
 
     var myUserId = Parse.User.current().id;
+    var currentUser = Parse.User.current();
 
     var Requests = Parse.Object.extend('Requests');
 
@@ -85,6 +86,7 @@ var OrderPage = React.createClass({
 
     requests.set('totalPrice', myTotalPrice);
     requests.set('status', 0)
+    requests.set('zipCode', Parse.User.current().get('zipCode'));
     var self = this;
     requests.save(null, {
             success: function(requests) {
@@ -104,6 +106,7 @@ tryToMatch: function() {
     var query = new Parse.Query(Requests);
 
     query.equalTo("status", 0)
+    query.equalTo('zipCode', Parse.User.current().get('zipCode'))
 
     var matchedPrice = 0;
     var matchedObjectId = "matched";

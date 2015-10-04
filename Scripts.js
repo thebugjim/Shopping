@@ -349,16 +349,21 @@ var MatchPage = React.createClass({
   },
 
   markComplete: function markComplete() {
-    this.state.matches.map(function (item) {
-      console.log(item);
-      item.set('status', 2);
-      item.save(null, {
-        success: function success(requestItems) {},
-        error: function error(requestItems, _error) {
-          alert('Failed to create new object ' + _error.message);
+    for (var i = 0; i < this.state.matches.length; i++) {
+      var match = this.state.matches[i];
+
+      match.set('status', 2);
+
+      var toRefresh = i === this.state.matches.length - 1;
+
+      match.save(null, {
+        success: function success(items) {
+          if (toRefresh) {
+            location.reload();
+          }
         }
       });
-    });
+    }
   },
 
   logout: function logout() {
@@ -569,6 +574,7 @@ var OrderPage = React.createClass({
     // FRONT-END TODO
 
     var myUserId = Parse.User.current().id;
+    var currentUser = Parse.User.current();
 
     var Requests = Parse.Object.extend('Requests');
 
@@ -616,6 +622,7 @@ var OrderPage = React.createClass({
 
     requests.set('totalPrice', myTotalPrice);
     requests.set('status', 0);
+    requests.set('zipCode', Parse.User.current().get('zipCode'));
     var self = this;
     requests.save(null, {
       success: function success(requests) {
@@ -634,6 +641,7 @@ var OrderPage = React.createClass({
     var query = new Parse.Query(Requests);
 
     query.equalTo("status", 0);
+    query.equalTo('zipCode', Parse.User.current().get('zipCode'));
 
     var matchedPrice = 0;
     var matchedObjectId = "matched";
@@ -901,7 +909,7 @@ var App = React.createClass({
       ),
       React.createElement(
         "button",
-        { onClick: Parse.User.logOut },
+        { onClick: this.logout },
         "Logout"
       )
     );
