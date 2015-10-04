@@ -45,6 +45,7 @@ var LoginScreen = React.createClass({
     // other fields can be set just like with Parse.Object
     user.set("phoneNumber", document.getElementById('phonenumber').value);
     user.set("zipCode", document.getElementById('zipcode').value);
+    user.set("noRequests", true);
 
     user.signUp(null, {
       success: function success(user) {
@@ -480,16 +481,15 @@ var App = React.createClass({
     var self = this;
     query.find({
       success: function success(results) {
+        if (results.length === 0) {
+          self.setState({
+            page: 'OrderPage'
+          });
+        }
+
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
-          if (object.get('status') == 0) {
-            //display the pending request page
-            self.setState({
-              page: 'PendingPage'
-            });
-            return;
-          }
           if (object.get('status') == 1) {
             //show the matched page
             self.setState({
@@ -497,10 +497,12 @@ var App = React.createClass({
             });
             return;
           }
+          // //display the pending request page
+          // self.setState({
+          //   page: 'PendingPage'
+          // })
+          // return;
         }
-        self.setState({
-          page: 'OrderPage'
-        });
       }
     });
   },

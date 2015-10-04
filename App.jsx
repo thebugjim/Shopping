@@ -29,17 +29,15 @@ var App = React.createClass({
     var self = this;
     query.find({
       success: function(results) {
+        if (results.length === 0) {
+          self.setState({
+            page: 'OrderPage'
+          })
+        }
+
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
-          if(object.get('status') == 0)
-          {
-            //display the pending request page
-            self.setState({
-              page: 'PendingPage'
-            })
-            return;
-          }
           if(object.get('status') == 1)
           {
             //show the matched page
@@ -48,11 +46,12 @@ var App = React.createClass({
             })
             return;
           }
+          // //display the pending request page
+          // self.setState({
+          //   page: 'PendingPage'
+          // })
+          // return;
         }
-        self.setState({
-          page: 'OrderPage'
-        })
-
       },
     })
   },
