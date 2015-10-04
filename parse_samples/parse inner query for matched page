@@ -1,0 +1,16 @@
+parse inner query for matched page
+
+
+var Requests = Parse.Object.extend("Requests");
+var RequestItems = Parse.Object.extend("RequestItems");
+
+var query = new Parse.Query(Requests);
+query.equalTo(matchedObjectId);
+
+var query2 = new Parse.Query(RequestItems);
+query2.matchesKeyInQuery("objectId", query);
+query2.find({
+	success: function(results) {
+	 //list out all the request items. 
+	}
+})

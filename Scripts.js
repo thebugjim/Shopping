@@ -540,24 +540,27 @@ var OrderPage = React.createClass({
     });
   },
 
-  tryToMatch: function tryToMatch() {
-    console.log('trying to match');
+  tryToMatch: function() {
+    console.log('trying to match')
     var Requests = Parse.Object.extend("Requests");
     var query = new Parse.Query(Requests);
 
-    query.equalTo("status", 0);
+    query.equalTo("status", 0)
 
     var matchedPrice = 0;
+    var matchedObjectId = "matched";
     query.find({
-      success: function success(results) {
+      success: function(results) {
 
-        var matchedObjectId = '';
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           matchedPrice += object.get('totalPrice');
-          matchedObjectId += object.get('objectId');
-          if (matchedPrice >= 35) {
-            for (i; i >= 0; i--) {
+          var concat = object.get('userObjectId');
+          matchedObjectId += concat;
+          if(matchedPrice >= 35)
+          {
+            for (i; i >= 0; i--)
+            {
               var object = results[i];
               object.set("status", 1);
               object.set("matchedObjectId", matchedObjectId);
@@ -567,11 +570,12 @@ var OrderPage = React.createClass({
           }
         }
       },
-      error: function error(_error4) {
-        alert("Error: " + _error4.code + " " + _error4.message);
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
       }
-    }).then(function () {
-      location.reload();
+    })
+    .then(function() {
+      location.reload()
     });
   },
 
