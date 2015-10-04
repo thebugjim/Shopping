@@ -140,17 +140,19 @@ tryToMatch: function() {
   generateItemForm: function() {
     var newForm = (
       <div className="form-inline" key={this.state.i ++}>
+        <center>
         <div className="form-group">
-          <label htmlFor="orderurl">Order URL</label>
-          <input type="url" className="form-control itemurl" size="50%" placeholder="www.amazon.com/example"/>
+          <label htmlFor="orderurl" style={{color: "#000000"}}>Order URL</label>
+          <input type="url" className="form-control itemurl" size="200%" placeholder="www.amazon.com/example"/>
         </div>
         <div className="form-group">
-          <label htmlFor="price">Price</label>
+          <label htmlFor="price" style={{color: "#000000"}}>Price</label>
           <div className="input-group">
             <div className="input-group-addon">$</div>
             <input type="text" className="form-control itemprice" size="4" placeholder="XX.XX"/>
           </div>
         </div>
+        </center>
       </div>
     )
     var itemForms = this.state.itemForms
@@ -165,10 +167,10 @@ tryToMatch: function() {
       <div>
         <br/>
         <br/>
-        <center><h2>Welcome to BundleMe</h2></center>
+        <center><h2 style={{color: "#000000"}}>Welcome to BundleMe</h2></center>
         <br/>
         <br/>
-        <center><h3>Add an order</h3></center>
+        <center><h3 style={{color: "#000000"}}>Add an order</h3></center>
 
         {this.state.itemForms}
 
@@ -178,16 +180,14 @@ tryToMatch: function() {
               </div>
             </div>
             <div className="form-group">
-              <div className="col-sm-offset-2 col-sm-10">
-                <center><button type="button" className="btn btn-primary" onClick={this.generateItemForm}>Add another item</button></center>
-              </div>
+              <center><button type="button" style={{backgroundColor: "#FFBC00"}} className="btn btn-primary" onClick={this.generateItemForm}>Add another item</button></center>
             </div>
             <br/>
             <br/>
             <br/>
             <center>
-              <button type="submit" className="btn btn-lg btn-primary" onClick={this.createRequest}>Submit Order</button>
-              <p>Note: total of orders must be at least $7.00</p>
+              <button type="submit" style={{backgroundColor: "#FFBC00"}} className="btn btn-lg btn-primary" onClick={this.createRequest}>Submit Order</button>
+              <p style={{color: "#000000"}}>Note: total of orders must be at least $7.00</p>
             </center>
         </div>
       </div>
