@@ -404,28 +404,32 @@ var MatchPage = React.createClass({
                 "tr",
                 { key: Date.now() },
                 React.createElement(
-                  "table",
-                  { className: "table" },
+                  "td",
+                  null,
                   React.createElement(
-                    "tr",
-                    null,
+                    "table",
+                    { className: "table" },
                     React.createElement(
-                      "th",
+                      "tr",
                       null,
-                      "example1@gmail.com"
+                      React.createElement(
+                        "th",
+                        null,
+                        "example1@gmail.com"
+                      ),
+                      React.createElement(
+                        "th",
+                        null,
+                        "Item URL"
+                      ),
+                      React.createElement(
+                        "th",
+                        null,
+                        "Price"
+                      )
                     ),
-                    React.createElement(
-                      "th",
-                      null,
-                      "Item URL"
-                    ),
-                    React.createElement(
-                      "th",
-                      null,
-                      "Price"
-                    )
-                  ),
-                  items
+                    items
+                  )
                 )
               ));
               self.setState({

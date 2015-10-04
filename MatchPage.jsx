@@ -118,6 +118,7 @@ var MatchPage = React.createClass({
               var rows = self.state.rows
               rows.push(
                 <tr key={Date.now()}>
+                  <td>
                   <table className="table">
                     <tr>
                       <th>example1@gmail.com</th>
@@ -125,7 +126,7 @@ var MatchPage = React.createClass({
                       <th>Price</th>
                     </tr>
                     {items}
-                  </table>
+                  </table></td>
                 </tr>
               )
               self.setState({
