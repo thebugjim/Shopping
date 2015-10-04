@@ -5,12 +5,56 @@ var Requests = Parse.Object.extend("Requests");
 var RequestItems = Parse.Object.extend("RequestItems");
 
 var query = new Parse.Query(Requests);
-query.equalTo(matchedObjectId);
+query.equalTo("matchedObjectId", matchedObjectId);
 
 var query2 = new Parse.Query(RequestItems);
 query2.matchesKeyInQuery("objectId", query);
 query2.find({
 	success: function(results) {
-	 //list out all the request items. 
+	for(i = 0; i < results.length; i++)
+		{
+			//list out all the request items. 
+		}
+	}
+})
+
+
+
+/////////////////////////////////////////////////////////////////////////////////Queries inside of Query
+
+var Requests = Parse.Object.extend("Requests");
+var RequestItems = Parse.Object.extend("RequestItems");
+
+var query = new Parse.Query(Requests);
+
+
+query.equalTo("matchedObjectId", matchedObjectId);
+query.find({
+	success: function(results) {
+		for(i = 0; i < results.length; i++)
+		{
+			var object = results[i];
+			var username = object.get("username");
+			var phonenumber = object.get("phoneNumber");
+			var userid = object.get("userObjectId");
+			//display header of section here
+			//now query through and find all of this user's selected items 
+			var query2 = new Parse.Query(RequestItems);
+			query2.equalTo("userObjectId", userid);
+			query2.find({
+				success: function(results) {
+					for(i = 0; i < results.length; i++)
+					{
+						var object = results[i];
+						var url = object.get("url");
+						var itemprice = object.get("itemPrice");
+						//display this item
+					}
+				}
+			})
+
+			var subtotal = object.get("totalPrice");
+			//display total per user
+		}
 	}
 })
