@@ -77,10 +77,11 @@ var App = React.createClass({
 
     return (
       <div>
-        Logged in as {Parse.User}
+        <div className="starter-template">
+          <h1 style={{color: '#000000'}}>Sorry, you have not been matched yet...</h1>
+          <p className="lead" style={{color: '#000000'}}>Please check back soon!</p>
+        </div>
         <button onClick={Parse.User.logOut}>Logout</button>
-        <button onClick={this.checkRequests}>Check Requests</button>
-        <button onClick={this.createRequest}>Create Request</button>
       </div>
     )
   }
