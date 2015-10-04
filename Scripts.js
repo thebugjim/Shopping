@@ -363,11 +363,11 @@ var MatchPage = React.createClass({
           query2.equalTo("userObjectId", item.get('userObjectId'));
           query2.find({
 
-            success: function success(results) {
+            success: function success(results2) {
               var items = [];
 
-              for (var i = 0; i < results.length; i++) {
-                var object = results[i];
+              for (var i = 0; i < results2.length; i++) {
+                var object = results2[i];
                 var url = object.get("url");
                 var itemprice = object.get("itemPrice");
                 //display this item
@@ -396,24 +396,40 @@ var MatchPage = React.createClass({
                   null,
                   React.createElement(
                     "table",
-                    { className: "table" },
+                    { className: "table", style: { tableLayout: 'fixed' } },
                     React.createElement(
-                      "tr",
+                      "thead",
                       null,
                       React.createElement(
-                        "th",
+                        "tr",
                         null,
-                        "example1@gmail.com"
-                      ),
-                      React.createElement(
-                        "th",
-                        null,
-                        "Item URL"
-                      ),
-                      React.createElement(
-                        "th",
-                        null,
-                        "Price"
+                        React.createElement(
+                          "th",
+                          null,
+                          React.createElement(
+                            "strong",
+                            null,
+                            results[0].get('email')
+                          )
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          React.createElement(
+                            "strong",
+                            null,
+                            "Item URL"
+                          )
+                        ),
+                        React.createElement(
+                          "th",
+                          null,
+                          React.createElement(
+                            "strong",
+                            null,
+                            "Price"
+                          )
+                        )
                       )
                     ),
                     items
@@ -455,7 +471,11 @@ var MatchPage = React.createClass({
             React.createElement(
               "table",
               { className: "table table-striped" },
-              this.state.rows
+              React.createElement(
+                "tbody",
+                null,
+                this.state.rows
+              )
             )
           )
         )
