@@ -801,22 +801,24 @@ var App = React.createClass({
     return React.createElement(
       "div",
       null,
-      "Logged in as ",
-      Parse.User,
+      React.createElement(
+        "div",
+        { className: "starter-template" },
+        React.createElement(
+          "h1",
+          { style: { color: '#000000' } },
+          "Sorry, you have not been matched yet..."
+        ),
+        React.createElement(
+          "p",
+          { className: "lead", style: { color: '#000000' } },
+          "Please check back soon!"
+        )
+      ),
       React.createElement(
         "button",
         { onClick: Parse.User.logOut },
         "Logout"
-      ),
-      React.createElement(
-        "button",
-        { onClick: this.checkRequests },
-        "Check Requests"
-      ),
-      React.createElement(
-        "button",
-        { onClick: this.createRequest },
-        "Create Request"
       )
     );
   }
