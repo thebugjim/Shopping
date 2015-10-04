@@ -127,25 +127,17 @@ var LoginScreen = React.createClass({
     // Render the text of each comment as a list item
     return (
       <div className="container">
-
         <div className="form-signin">
-          <h2 className="form-signin-heading">Please sign in</h2>
+          <h1 className="form-signin-heading" style={{color: '#000000'}}>Please sign in</h1>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
           <input type="email" id="inputEmail" className="form-control" placeholder="Username/Email address" required autofocus/>
           <label htmlFor="inputPassword" className="sr-only">Password</label>
           <input type="password" id="inputPassword" className="form-control" placeholder="Password" required/>
-          <div className="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me </input>
-            </label>
-          </div>
-          <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleSignIn}>Sign in</button>
-          <br/>
-          <br/>
-          <h2 className="form-signin-heading">Or sign up</h2>
-          <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.goToSignUp}>Sign up</button>
         </div>
-
+        <center><div className="form-inline" role="form">
+            <button className="btn btn-lg btn-primary " style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.handleSignIn}>Sign in</button>
+            <button className="btn btn-lg btn-primary" style={{backgroundColor: '#FFBC00'}} type="submit" onClick={this.goToSignUp}>Sign up</button>
+        </div></center>
       </div>
       // <ul>
       //   {this.data.comments.map(function(c) {
